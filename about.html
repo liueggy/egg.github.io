@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>关于 · EGG</title>
+    <link rel="stylesheet" href="./assets/style.css" />
+  </head>
+  <body>
+    <div class="background-blur"></div>
+    <div class="page page-narrow">
+      <header class="nav glass">
+        <div class="logo">EGG</div>
+        <nav class="nav-links">
+          <a href="./index.html">主页</a>
+          <a href="./blog.html">博客</a>
+          <a href="./learning.html">学习记录</a>
+        </nav>
+        <div class="pill">关于</div>
+      </header>
+
+      <main>
+        <section class="section glass" id="structure">
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">结构</p>
+              <h1>内容存放约定</h1>
+            </div>
+            <div class="pill">可自定义</div>
+          </div>
+          <div class="card glass">
+            <ul class="muted">
+              <li>文章列表：content/posts/posts.json</li>
+              <li>文章正文：content/posts/{slug}.html</li>
+              <li>学习记录：content/learning.json</li>
+              <li>图片 / 附件：assets/uploads/</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="section glass">
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">步骤</p>
+              <h2>如何发布一篇文章</h2>
+            </div>
+          </div>
+          <ol class="muted">
+            <li>复制 content/posts/hello-world.html 作为新文件，如 content/posts/my-post.html。</li>
+            <li>在 posts.json 追加：{"slug":"my-post","title":"标题","summary":"摘要","date":"2025-01-10","tags":["标签"],"status":"发布"}。</li>
+            <li>需要图片时放到 assets/uploads/，正文里用 &lt;img src="assets/uploads/xxx.png" alt="" /&gt; 引用。</li>
+          </ol>
+        </section>
+
+        <section class="section glass">
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">学习</p>
+              <h2>维护学习记录</h2>
+            </div>
+          </div>
+          <ul class="muted">
+            <li>长久保存：直接编辑 content/learning.json。</li>
+            <li>快速草稿：在学习页表单提交，保存于浏览器 localStorage。</li>
+          </ul>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <p class="muted">需要更多功能，可加入 Markdown 解析、标签过滤或评论系统。</p>
+      </footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,18 @@
+[
+  {
+    "slug": "hello-world",
+    "title": "第一篇：Hello World",
+    "summary": "示例文章，演示如何在正文中插入图片、代码和段落。",
+    "date": "2025-01-05",
+    "tags": ["示例", "起步"],
+    "status": "发布"
+  },
+  {
+    "slug": "weekly-learning",
+    "title": "每周学习小结样例",
+    "summary": "一篇周报样例，展示多段落和列表写法。",
+    "date": "2025-01-06",
+    "tags": ["学习", "周报"],
+    "status": "草稿"
+  }
+]

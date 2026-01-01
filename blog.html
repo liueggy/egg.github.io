@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>博客 · EGG</title>
+    <link rel="stylesheet" href="./assets/style.css" />
+  </head>
+  <body>
+    <div class="background-blur"></div>
+    <div class="page">
+      <header class="nav glass">
+        <div class="logo">EGG</div>
+        <nav class="nav-links">
+          <a href="./index.html">主页</a>
+          <a href="./learning.html">学习记录</a>
+          <a href="./about.html">关于</a>
+        </nav>
+        <div class="pill">博客列表</div>
+      </header>
+
+      <main>
+        <section class="section glass">
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">博客 Blog</p>
+              <h1>文章列表</h1>
+              <p class="muted">文章元数据来自 content/posts/posts.json · 内文存放在 content/posts/slug.html</p>
+            </div>
+            <a class="button ghost" href="./post.html?slug=hello-world">示例文章</a>
+          </div>
+
+          <div id="post-list" class="grid"></div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <p class="muted">写一篇新文章：在 content/posts/ 下创建文件并在 posts.json 添加记录。</p>
+      </footer>
+    </div>
+
+    <script>
+      async function loadPosts() {
+        const container = document.getElementById("post-list");
+        try {
+          const res = await fetch("./content/posts/posts.json?_=" + Date.now());
+          if (!res.ok) throw new Error("未能读取 posts.json");
+          const posts = await res.json();
+
+          if (!posts.length) {
+            container.innerHTML = '<p class="muted">暂无文章，去 content/posts/ 新建吧。</p>';
+            return;
+          }
+
+          container.innerHTML = posts
+            .map((post) => {
+              const tags = (post.tags || []).map((t) => `<span class="tag">${t}</span>`).join("");
+              return `
+                <article class="card glass">
+                  <div class="card-meta">
+                    <span class="dot"></span>
+                    <span class="muted">${post.status || "发布"}</span>
+                    <span class="muted">${post.date || "待定"}</span>
+                  </div>
+                  <h3>${post.title}</h3>
+                  <p class="muted">${post.summary || ""}</p>
+                  <div class="tags">${tags}</div>
+                  <a class="inline-link" href="./post.html?slug=${encodeURIComponent(post.slug)}">阅读 →</a>
+                </article>
+              `;
+            })
+            .join("");
+        } catch (err) {
+          container.innerHTML = `<p class="muted">加载失败：${err.message}</p>`;
+        }
+      }
+
+      loadPosts();
+    </script>
+  </body>
+</html>

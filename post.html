@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>文章 · EGG</title>
+    <link rel="stylesheet" href="./assets/style.css" />
+  </head>
+  <body>
+    <div class="background-blur"></div>
+    <div class="page page-narrow">
+      <header class="nav glass">
+        <div class="logo">EGG</div>
+        <nav class="nav-links">
+          <a href="./blog.html">博客</a>
+          <a href="./learning.html">学习记录</a>
+          <a href="./about.html">关于</a>
+        </nav>
+        <div class="pill">文章阅读</div>
+      </header>
+
+      <main>
+        <section class="section glass">
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">阅读</p>
+              <h1 id="post-title">加载中...</h1>
+              <p class="muted" id="post-meta"></p>
+            </div>
+            <a class="button ghost" href="./blog.html">返回列表</a>
+          </div>
+          <article id="post-body" class="article"></article>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <p class="muted">内容来自 content/posts/{slug}.html · 元信息来自 posts.json</p>
+      </footer>
+    </div>
+
+    <script>
+      async function loadPost() {
+        const params = new URLSearchParams(location.search);
+        const slug = params.get("slug") || "hello-world";
+        const target = `./content/posts/${slug}.html`;
+
+        const metaEl = document.getElementById("post-meta");
+        const titleEl = document.getElementById("post-title");
+        const bodyEl = document.getElementById("post-body");
+
+        try {
+          const [metaRes, htmlRes] = await Promise.all([
+            fetch("./content/posts/posts.json?_=" + Date.now()),
+            fetch(target + "?_=" + Date.now()),
+          ]);
+
+          if (!htmlRes.ok) throw new Error("未找到对应文章内容文件");
+          const html = await htmlRes.text();
+
+          let meta = {};
+          if (metaRes.ok) {
+            const list = await metaRes.json();
+            meta = list.find((p) => p.slug === slug) || {};
+          }
+
+          titleEl.textContent = meta.title || slug;
+          metaEl.textContent = `${meta.date || "时间未填"} · ${meta.status || "发布"}`;
+          bodyEl.innerHTML = html;
+        } catch (err) {
+          titleEl.textContent = "加载失败";
+          metaEl.textContent = err.message;
+          bodyEl.innerHTML = '<p class="muted">检查文件路径或 slug 参数。</p>';
+        }
+      }
+
+      loadPost();
+    </script>
+  </body>
+</html>
