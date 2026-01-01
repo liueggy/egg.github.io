@@ -1,111 +1,166 @@
 <!doctype html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>EGG · 黑白毛玻璃空间</title>
-    <link rel="stylesheet" href="./assets/style.css" />
-  </head>
-  <body>
-    <div class="background-blur"></div>
-    <div class="page">
-      <header class="nav glass">
-        <div class="logo">EGG</div>
-        <nav class="nav-links">
-          <a href="./blog.html">博客</a>
-          <a href="./learning.html">学习记录</a>
-          <a href="./about.html">关于</a>
-        </nav>
-        <div class="pill">黑白 · 毛玻璃</div>
-      </header>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>EGG · 黑白毛玻璃空间</title>
+        <meta
+            name="description"
+            content="黑白毛玻璃风格的个人空间，包含主页、博客列表、文章阅读与学习记录时间轴。"
+        />
+        <meta name="keywords" content="博客, 学习记录, 极简, 毛玻璃, 黑白" />
+        <meta name="author" content="EGG" />
+        <link rel="canonical" href="https://egg.github.io/" />
+        <meta property="og:site_name" content="EGG" />
+        <meta property="og:title" content="EGG · 黑白毛玻璃空间" />
+        <meta
+            property="og:description"
+            content="黑白毛玻璃风格的个人空间，包含主页、博客列表、文章阅读与学习记录时间轴。"
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://egg.github.io/" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="theme-color" content="#050505" />
+        <link
+            rel="icon"
+            type="image/png"
+            href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+Zf6kAAAAASUVORK5CYII="
+        />
+        <link
+            rel="shortcut icon"
+            href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+Zf6kAAAAASUVORK5CYII="
+        />
+        <link
+            rel="apple-touch-icon"
+            href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+Zf6kAAAAASUVORK5CYII="
+        />
+        <link rel="stylesheet" href="./assets/style.css" />
+    </head>
+    <body>
+        <div class="background-blur"></div>
+        <div class="page">
+            <header class="nav glass">
+                <div class="logo">EGG</div>
+                <nav class="nav-links">
+                    <a href="./blog.html">博客</a>
+                    <a href="./learning.html">学习记录</a>
+                    <a href="./about.html">关于</a>
+                </nav>
+                <div class="pill">黑白 · 毛玻璃</div>
+            </header>
 
-      <main>
-        <section class="hero glass">
-          <div>
-            <p class="eyebrow">极简 · 安静 · 纯净</p>
-            <h1>欢迎来到我的黑白空间</h1>
-            <p class="lede">
-              页面已拆分：主页介绍、博客列表、文章阅读页、学习记录页。把内容放进 content/
-              文件夹即可上线，图片放到 assets/uploads/。
-            </p>
-            <div class="actions">
-              <a class="button primary" href="./blog.html">写 / 看博客</a>
-              <a class="button ghost" href="./learning.html">记录学习</a>
-            </div>
-          </div>
-          <div class="hero-badge glass">
-            <p class="eyebrow">已预置存放结构</p>
-            <h3>content/ 与 uploads/</h3>
-            <p class="muted">文章、学习日志、图片集中管理，方便版本控制。</p>
-          </div>
-        </section>
+            <main>
+                <section class="hero glass">
+                    <div>
+                        <p class="eyebrow">极简 · 安静 · 纯净</p>
+                        <h1>欢迎来到我的黑白空间</h1>
+                        <p class="lede">
+                            页面已拆分：主页介绍、博客列表、文章阅读页、学习记录页。把内容放进
+                            content/ 文件夹即可上线，图片放到 assets/uploads/。
+                        </p>
+                        <div class="actions">
+                            <a class="button primary" href="./blog.html"
+                                >写 / 看博客</a
+                            >
+                            <a class="button ghost" href="./learning.html"
+                                >记录学习</a
+                            >
+                        </div>
+                    </div>
+                    <div class="hero-badge glass">
+                        <p class="eyebrow">已预置存放结构</p>
+                        <h3>content/ 与 uploads/</h3>
+                        <p class="muted">
+                            文章、学习日志、图片集中管理，方便版本控制。
+                        </p>
+                    </div>
+                </section>
 
-        <section class="section glass">
-          <div class="section-header">
-            <div>
-              <p class="eyebrow">起步</p>
-              <h2>快速入口</h2>
-              <p class="muted">常用页面与说明，一键跳转。</p>
-            </div>
-            <a class="button ghost" href="./about.html">查看细节</a>
-          </div>
-          <div class="grid">
-            <article class="card glass">
-              <div class="card-meta">
-                <span class="dot"></span>
-                <span class="muted">博客</span>
-              </div>
-              <h3>博客列表与发布</h3>
-              <p class="muted">在 content/posts/ 写文章，自动出现在博客列表。支持图片。</p>
-              <a class="inline-link" href="./blog.html">进入博客 →</a>
-            </article>
-            <article class="card glass">
-              <div class="card-meta">
-                <span class="dot"></span>
-                <span class="muted">学习</span>
-              </div>
-              <h3>学习日志</h3>
-              <p class="muted">按时间轴呈现学习记录，可在浏览器上快速添加草稿。</p>
-              <a class="inline-link" href="./learning.html">打开学习页 →</a>
-            </article>
-            <article class="card glass">
-              <div class="card-meta">
-                <span class="dot"></span>
-                <span class="muted">资产</span>
-              </div>
-              <h3>资源存放</h3>
-              <p class="muted">文章：content/posts/ · 学习：content/learning.json · 图片：assets/uploads/。</p>
-              <a class="inline-link" href="./about.html#structure">查看结构 →</a>
-            </article>
-          </div>
-        </section>
+                <section class="section glass">
+                    <div class="section-header">
+                        <div>
+                            <p class="eyebrow">起步</p>
+                            <h2>快速入口</h2>
+                            <p class="muted">常用页面与说明，一键跳转。</p>
+                        </div>
+                        <a class="button ghost" href="./about.html">查看细节</a>
+                    </div>
+                    <div class="grid">
+                        <article class="card glass">
+                            <div class="card-meta">
+                                <span class="dot"></span>
+                                <span class="muted">博客</span>
+                            </div>
+                            <h3>博客列表与发布</h3>
+                            <p class="muted">
+                                在 content/posts/
+                                写文章，自动出现在博客列表。支持图片。
+                            </p>
+                            <a class="inline-link" href="./blog.html"
+                                >进入博客 →</a
+                            >
+                        </article>
+                        <article class="card glass">
+                            <div class="card-meta">
+                                <span class="dot"></span>
+                                <span class="muted">学习</span>
+                            </div>
+                            <h3>学习日志</h3>
+                            <p class="muted">
+                                按时间轴呈现学习记录，可在浏览器上快速添加草稿。
+                            </p>
+                            <a class="inline-link" href="./learning.html"
+                                >打开学习页 →</a
+                            >
+                        </article>
+                        <article class="card glass">
+                            <div class="card-meta">
+                                <span class="dot"></span>
+                                <span class="muted">资产</span>
+                            </div>
+                            <h3>资源存放</h3>
+                            <p class="muted">
+                                文章：content/posts/ ·
+                                学习：content/learning.json ·
+                                图片：assets/uploads/。
+                            </p>
+                            <a class="inline-link" href="./about.html#structure"
+                                >查看结构 →</a
+                            >
+                        </article>
+                    </div>
+                </section>
 
-        <section class="section glass">
-          <div class="section-header">
-            <div>
-              <p class="eyebrow">使用提示</p>
-              <h2>写作与图片</h2>
-            </div>
-            <div class="pill">可随时拓展</div>
-          </div>
-          <div class="grid two">
-            <div class="card glass">
-              <h4>发布博客</h4>
-              <p class="muted">
-                在 content/posts/ 新建 HTML 文件并在 posts.json 中登记元数据；图片放 assets/uploads/。
-              </p>
-            </div>
-            <div class="card glass">
-              <h4>学习记录</h4>
-              <p class="muted">编辑 content/learning.json 持久保存；页面表单可快速添加浏览器本地草稿。</p>
-            </div>
-          </div>
-        </section>
-      </main>
+                <section class="section glass">
+                    <div class="section-header">
+                        <div>
+                            <p class="eyebrow">使用提示</p>
+                            <h2>写作与图片</h2>
+                        </div>
+                        <div class="pill">可随时拓展</div>
+                    </div>
+                    <div class="grid two">
+                        <div class="card glass">
+                            <h4>发布博客</h4>
+                            <p class="muted">
+                                在 content/posts/ 新建 HTML 文件并在 posts.json
+                                中登记元数据；图片放 assets/uploads/。
+                            </p>
+                        </div>
+                        <div class="card glass">
+                            <h4>学习记录</h4>
+                            <p class="muted">
+                                编辑 content/learning.json
+                                持久保存；页面表单可快速添加浏览器本地草稿。
+                            </p>
+                        </div>
+                    </div>
+                </section>
+            </main>
 
-      <footer class="footer">
-        <p class="muted">© 2025 EGG · 记录、思考、持续迭代。</p>
-      </footer>
-    </div>
-  </body>
+            <footer class="footer">
+                <p class="muted">© 2025 EGG · 记录、思考、持续迭代。</p>
+            </footer>
+        </div>
+    </body>
 </html>

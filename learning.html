@@ -1,154 +1,263 @@
 <!doctype html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>学习记录 · EGG</title>
-    <link rel="stylesheet" href="./assets/style.css" />
-  </head>
-  <body>
-    <div class="background-blur"></div>
-    <div class="page">
-      <header class="nav glass">
-        <div class="logo">EGG</div>
-        <nav class="nav-links">
-          <a href="./index.html">主页</a>
-          <a href="./blog.html">博客</a>
-          <a href="./about.html">关于</a>
-        </nav>
-        <div class="pill">学习记录</div>
-      </header>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>学习记录 · EGG</title>
+        <meta
+            name="description"
+            content="EGG 学习记录时间轴，持久数据来自 content/learning.json，本地草稿保存在浏览器。"
+        />
+        <meta
+            name="keywords"
+            content="学习记录, 时间轴, 草稿, 极简, 毛玻璃, 黑白"
+        />
+        <meta name="author" content="EGG" />
+        <link rel="canonical" href="https://egg.github.io/learning.html" />
+        <meta property="og:site_name" content="EGG" />
+        <meta property="og:title" content="学习记录 · EGG" />
+        <meta
+            property="og:description"
+            content="EGG 学习记录时间轴，持久数据来自 content/learning.json，本地草稿保存在浏览器。"
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://egg.github.io/learning.html" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="theme-color" content="#050505" />
+        <link
+            rel="icon"
+            type="image/png"
+            href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+Zf6kAAAAASUVORK5CYII="
+        />
+        <link
+            rel="shortcut icon"
+            href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+Zf6kAAAAASUVORK5CYII="
+        />
+        <link
+            rel="apple-touch-icon"
+            href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+Zf6kAAAAASUVORK5CYII="
+        />
+        <link rel="stylesheet" href="./assets/style.css" />
+    </head>
+    <body>
+        <div class="background-blur"></div>
+        <div class="page">
+            <header class="nav glass">
+                <div class="logo">EGG</div>
+                <nav class="nav-links">
+                    <a href="./index.html">主页</a>
+                    <a href="./blog.html">博客</a>
+                    <a href="./about.html">关于</a>
+                </nav>
+                <div class="pill">学习记录</div>
+            </header>
 
-      <main>
-        <section class="section glass">
-          <div class="section-header">
-            <div>
-              <p class="eyebrow">Learning</p>
-              <h1>学习时间轴</h1>
-              <p class="muted">持久数据来源：content/learning.json · 页面表单：保存到浏览器本地草稿（localStorage）。</p>
-            </div>
-            <a class="button ghost" href="./blog.html">查看博客</a>
-          </div>
+            <main>
+                <section class="section glass">
+                    <div class="section-header">
+                        <div>
+                            <p class="eyebrow">Learning</p>
+                            <h1>学习时间轴</h1>
+                            <p class="muted">
+                                持久数据来源：content/learning.json ·
+                                页面表单：保存到浏览器本地草稿（localStorage）。
+                            </p>
+                        </div>
+                        <a class="button ghost" href="./blog.html">查看博客</a>
+                    </div>
 
-          <ul id="timeline" class="timeline"></ul>
-        </section>
+                    <ul id="timeline" class="timeline"></ul>
+                </section>
 
-        <section class="section glass">
-          <div class="section-header">
-            <div>
-              <p class="eyebrow">快速记录</p>
-              <h2>新增学习日志（本地草稿）</h2>
-              <p class="muted">提交后仅存于当前浏览器，可复制到 content/learning.json 永久保存。</p>
-            </div>
-            <div class="pill">草稿模式</div>
-          </div>
+                <section class="section glass">
+                    <div class="section-header">
+                        <div>
+                            <p class="eyebrow">快速记录</p>
+                            <h2>新增学习日志（本地草稿）</h2>
+                            <p class="muted">
+                                提交后仅存于当前浏览器，可复制到
+                                content/learning.json 永久保存。
+                            </p>
+                        </div>
+                        <div class="pill">草稿模式</div>
+                    </div>
 
-          <form id="note-form" class="form">
-            <div class="form-row">
-              <label>
-                日期
-                <input type="date" name="date" required />
-              </label>
-              <label>
-                标题
-                <input type="text" name="title" placeholder="学习主题" required />
-              </label>
-            </div>
-            <label>
-              内容
-              <textarea name="detail" rows="4" placeholder="记录进展、卡点或收获" required></textarea>
-            </label>
-            <div class="actions">
-              <button class="button primary" type="submit">添加到本地草稿</button>
-              <button class="button ghost" type="button" id="clear-drafts">清空本地草稿</button>
-            </div>
-            <p class="muted small">要长期保存：在 content/learning.json 中追加同样的记录。</p>
-          </form>
-        </section>
-      </main>
+                    <form id="note-form" class="form">
+                        <div class="form-row">
+                            <label>
+                                日期
+                                <input type="date" name="date" required />
+                            </label>
+                            <label>
+                                标题
+                                <input
+                                    type="text"
+                                    name="title"
+                                    placeholder="学习主题"
+                                    required
+                                />
+                            </label>
+                        </div>
+                        <label>
+                            内容
+                            <textarea
+                                name="detail"
+                                rows="4"
+                                placeholder="记录进展、卡点或收获"
+                                required
+                            ></textarea>
+                        </label>
+                        <div class="actions">
+                            <button class="button primary" type="submit">
+                                添加到本地草稿
+                            </button>
+                            <button
+                                class="button ghost"
+                                type="button"
+                                id="clear-drafts"
+                            >
+                                清空本地草稿
+                            </button>
+                        </div>
+                        <p class="muted small">
+                            要长期保存：在 content/learning.json
+                            中追加同样的记录。
+                        </p>
+                    </form>
+                </section>
+            </main>
 
-      <footer class="footer">
-        <p class="muted">学习日志文件：content/learning.json · 可手动编辑版本控制。</p>
-      </footer>
-    </div>
+            <footer class="footer">
+                <p class="muted">
+                    学习日志文件：content/learning.json · 可手动编辑版本控制。
+                </p>
+            </footer>
+        </div>
 
-    <script>
-      const TIMELINE_ID = "timeline";
-      const DRAFT_KEY = "egg-learning-drafts";
+        <script>
+            const TIMELINE_ID = "timeline";
+            const DRAFT_KEY = "egg-learning-drafts";
+            const TODAY = new Date().toISOString().slice(0, 10);
+            const dateInput = document.querySelector('input[name="date"]');
+            if (dateInput && !dateInput.value) {
+                dateInput.value = TODAY;
+            }
 
-      function renderTimeline(items) {
-        const list = document.getElementById(TIMELINE_ID);
-        if (!items.length) {
-          list.innerHTML = '<p class="muted">暂无记录，先添加一条吧。</p>';
-          return;
-        }
+            function escapeHTML(str = "") {
+                return String(str)
+                    .replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;")
+                    .replace(/"/g, "&quot;")
+                    .replace(/'/g, "&#39;");
+            }
 
-        const sorted = [...items].sort((a, b) => (b.date || "").localeCompare(a.date || ""));
-        list.innerHTML = sorted
-          .map(
-            (item) => `
+            function renderTimeline(items) {
+                const list = document.getElementById(TIMELINE_ID);
+                if (!items.length) {
+                    list.innerHTML =
+                        '<p class="muted">暂无记录，先添加一条吧。</p>';
+                    return;
+                }
+
+                const sorted = [...items].sort((a, b) =>
+                    (b.date || TODAY).localeCompare(a.date || TODAY),
+                );
+                list.innerHTML = sorted
+                    .map((item) => {
+                        const displayDate = escapeHTML(item.date || TODAY);
+                        const displayTitle = escapeHTML(item.title || "无标题");
+                        const displayDetail = escapeHTML(item.detail || "");
+                        const displaySource = escapeHTML(
+                            item.source || "content/learning.json",
+                        );
+                        return `
               <li class="timeline-item">
                 <div class="timeline-dot"></div>
                 <div>
-                  <p class="eyebrow">${item.date || "未填日期"}</p>
-                  <h4>${item.title || "无标题"}</h4>
-                  <p class="muted">${item.detail || ""}</p>
-                  <p class="muted small">来源：${item.source || "content/learning.json"}</p>
+                  <p class="eyebrow">${displayDate}</p>
+                  <h4>${displayTitle}</h4>
+                  <p class="muted">${displayDetail}</p>
+                  <p class="muted small">来源：${displaySource}</p>
                 </div>
               </li>
-            `
-          )
-          .join("");
-      }
+            `;
+                    })
+                    .join("");
+            }
 
-      async function loadRemoteNotes() {
-        try {
-          const res = await fetch("./content/learning.json?_=" + Date.now());
-          if (!res.ok) throw new Error("learning.json 读取失败");
-          return await res.json();
-        } catch (err) {
-          console.warn(err);
-          return [];
-        }
-      }
+            async function loadRemoteNotes() {
+                try {
+                    const res = await fetch(
+                        "./content/learning.json?_=" + Date.now(),
+                    );
+                    if (!res.ok) throw new Error("learning.json 读取失败");
+                    return await res.json();
+                } catch (err) {
+                    console.warn(err);
+                    return [];
+                }
+            }
 
-      function loadDrafts() {
-        try {
-          return JSON.parse(localStorage.getItem(DRAFT_KEY) || "[]");
-        } catch (err) {
-          console.warn(err);
-          return [];
-        }
-      }
+            function loadDrafts() {
+                try {
+                    return JSON.parse(localStorage.getItem(DRAFT_KEY) || "[]");
+                } catch (err) {
+                    console.warn(err);
+                    return [];
+                }
+            }
 
-      function saveDrafts(drafts) {
-        localStorage.setItem(DRAFT_KEY, JSON.stringify(drafts));
-      }
+            function saveDrafts(drafts) {
+                localStorage.setItem(DRAFT_KEY, JSON.stringify(drafts));
+            }
 
-      async function init() {
-        const remote = await loadRemoteNotes();
-        const drafts = loadDrafts();
-        const merged = [...remote.map((n) => ({ ...n, source: "content/learning.json" })), ...drafts.map((n) => ({ ...n, source: "本地草稿" }))];
-        renderTimeline(merged);
-      }
+            async function init() {
+                const list = document.getElementById(TIMELINE_ID);
+                if (list) {
+                    list.innerHTML = '<p class="muted">加载中...</p>';
+                }
+                const remote = await loadRemoteNotes();
+                const drafts = loadDrafts();
+                const merged = [
+                    ...remote.map((n) => ({
+                        ...n,
+                        date: n.date || TODAY,
+                        source: "content/learning.json",
+                    })),
+                    ...drafts.map((n) => ({
+                        ...n,
+                        date: n.date || TODAY,
+                        source: "本地草稿",
+                    })),
+                ];
+                renderTimeline(merged);
+            }
 
-      document.getElementById("note-form").addEventListener("submit", (e) => {
-        e.preventDefault();
-        const form = e.currentTarget;
-        const data = Object.fromEntries(new FormData(form).entries());
-        const drafts = loadDrafts();
-        drafts.push({ ...data, source: "本地草稿" });
-        saveDrafts(drafts);
-        form.reset();
-        init();
-      });
+            document
+                .getElementById("note-form")
+                .addEventListener("submit", (e) => {
+                    e.preventDefault();
+                    const form = e.currentTarget;
+                    const data = Object.fromEntries(
+                        new FormData(form).entries(),
+                    );
+                    const drafts = loadDrafts();
+                    const date = data.date || TODAY;
+                    drafts.push({ ...data, date, source: "本地草稿" });
+                    saveDrafts(drafts);
+                    form.reset();
+                    init();
+                });
 
-      document.getElementById("clear-drafts").addEventListener("click", () => {
-        localStorage.removeItem(DRAFT_KEY);
-        init();
-      });
+            document
+                .getElementById("clear-drafts")
+                .addEventListener("click", () => {
+                    localStorage.removeItem(DRAFT_KEY);
+                    init();
+                });
 
-      init();
-    </script>
-  </body>
+            init();
+        </script>
+    </body>
 </html>

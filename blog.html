@@ -1,81 +1,152 @@
 <!doctype html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>博客 · EGG</title>
-    <link rel="stylesheet" href="./assets/style.css" />
-  </head>
-  <body>
-    <div class="background-blur"></div>
-    <div class="page">
-      <header class="nav glass">
-        <div class="logo">EGG</div>
-        <nav class="nav-links">
-          <a href="./index.html">主页</a>
-          <a href="./learning.html">学习记录</a>
-          <a href="./about.html">关于</a>
-        </nav>
-        <div class="pill">博客列表</div>
-      </header>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>博客 · EGG</title>
+        <meta
+            name="description"
+            content="EGG 博客列表，文章元数据来自 content/posts/posts.json，正文存放在 content/posts/{slug}.html。"
+        />
+        <meta name="keywords" content="博客, 极简, 毛玻璃, 黑白, 学习记录" />
+        <meta name="author" content="EGG" />
+        <link rel="canonical" href="https://egg.github.io/blog.html" />
+        <meta property="og:site_name" content="EGG" />
+        <meta property="og:title" content="博客 · EGG" />
+        <meta
+            property="og:description"
+            content="EGG 博客列表，文章元数据来自 content/posts/posts.json，正文存放在 content/posts/{slug}.html。"
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://egg.github.io/blog.html" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="theme-color" content="#050505" />
+        <link
+            rel="icon"
+            type="image/png"
+            href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+Zf6kAAAAASUVORK5CYII="
+        />
+        <link
+            rel="shortcut icon"
+            href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+Zf6kAAAAASUVORK5CYII="
+        />
+        <link
+            rel="apple-touch-icon"
+            href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+Zf6kAAAAASUVORK5CYII="
+        />
+        <link rel="stylesheet" href="./assets/style.css" />
+    </head>
+    <body>
+        <div class="background-blur"></div>
+        <div class="page">
+            <header class="nav glass">
+                <div class="logo">EGG</div>
+                <nav class="nav-links">
+                    <a href="./index.html">主页</a>
+                    <a href="./learning.html">学习记录</a>
+                    <a href="./about.html">关于</a>
+                </nav>
+                <div class="pill">博客列表</div>
+            </header>
 
-      <main>
-        <section class="section glass">
-          <div class="section-header">
-            <div>
-              <p class="eyebrow">博客 Blog</p>
-              <h1>文章列表</h1>
-              <p class="muted">文章元数据来自 content/posts/posts.json · 内文存放在 content/posts/slug.html</p>
-            </div>
-            <a class="button ghost" href="./post.html?slug=hello-world">示例文章</a>
-          </div>
+            <main>
+                <section class="section glass">
+                    <div class="section-header">
+                        <div>
+                            <p class="eyebrow">博客 Blog</p>
+                            <h1>文章列表</h1>
+                            <p class="muted">
+                                文章元数据来自 content/posts/posts.json ·
+                                内文存放在 content/posts/slug.html
+                            </p>
+                        </div>
+                        <a
+                            class="button ghost"
+                            href="./post.html?slug=hello-world"
+                            >示例文章</a
+                        >
+                    </div>
 
-          <div id="post-list" class="grid"></div>
-        </section>
-      </main>
+                    <div id="post-list" class="grid"></div>
+                </section>
+            </main>
 
-      <footer class="footer">
-        <p class="muted">写一篇新文章：在 content/posts/ 下创建文件并在 posts.json 添加记录。</p>
-      </footer>
-    </div>
+            <footer class="footer">
+                <p class="muted">
+                    写一篇新文章：在 content/posts/ 下创建文件并在 posts.json
+                    添加记录。
+                </p>
+            </footer>
+        </div>
 
-    <script>
-      async function loadPosts() {
-        const container = document.getElementById("post-list");
-        try {
-          const res = await fetch("./content/posts/posts.json?_=" + Date.now());
-          if (!res.ok) throw new Error("未能读取 posts.json");
-          const posts = await res.json();
+        <script>
+            function escapeHTML(str = "") {
+                return String(str)
+                    .replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;")
+                    .replace(/"/g, "&quot;")
+                    .replace(/'/g, "&#39;");
+            }
 
-          if (!posts.length) {
-            container.innerHTML = '<p class="muted">暂无文章，去 content/posts/ 新建吧。</p>';
-            return;
-          }
+            async function loadPosts() {
+                const container = document.getElementById("post-list");
+                container.innerHTML = '<p class="muted">加载中...</p>';
+                try {
+                    const res = await fetch(
+                        "./content/posts/posts.json?_=" + Date.now(),
+                    );
+                    if (!res.ok) throw new Error("未能读取 posts.json");
+                    const posts = await res.json();
 
-          container.innerHTML = posts
-            .map((post) => {
-              const tags = (post.tags || []).map((t) => `<span class="tag">${t}</span>`).join("");
-              return `
+                    if (!posts.length) {
+                        container.innerHTML =
+                            '<p class="muted">暂无文章，去 content/posts/ 新建吧。</p>';
+                        return;
+                    }
+
+                    const safeDate = (val) =>
+                        (val && String(val).trim()) || "0000-00-00";
+                    const sorted = [...posts].sort((a, b) =>
+                        safeDate(b.date).localeCompare(safeDate(a.date)),
+                    );
+
+                    container.innerHTML = sorted
+                        .map((post) => {
+                            const tags = (post.tags || [])
+                                .map(
+                                    (t) =>
+                                        `<span class="tag">${escapeHTML(t)}</span>`,
+                                )
+                                .join("");
+                            const title = escapeHTML(post.title || "");
+                            const summary = escapeHTML(post.summary || "");
+                            const status = escapeHTML(post.status || "发布");
+                            const date = escapeHTML(post.date || "待定");
+                            const slug = encodeURIComponent(
+                                post.slug || "hello-world",
+                            );
+                            return `
                 <article class="card glass">
                   <div class="card-meta">
                     <span class="dot"></span>
-                    <span class="muted">${post.status || "发布"}</span>
-                    <span class="muted">${post.date || "待定"}</span>
+                    <span class="muted">${status}</span>
+                    <span class="muted">${date}</span>
                   </div>
-                  <h3>${post.title}</h3>
-                  <p class="muted">${post.summary || ""}</p>
+                  <h3>${title}</h3>
+                  <p class="muted">${summary}</p>
                   <div class="tags">${tags}</div>
-                  <a class="inline-link" href="./post.html?slug=${encodeURIComponent(post.slug)}">阅读 →</a>
+                  <a class="inline-link" href="./post.html?slug=${slug}">阅读 →</a>
                 </article>
               `;
-            })
-            .join("");
-        } catch (err) {
-          container.innerHTML = `<p class="muted">加载失败：${err.message}</p>`;
-        }
-      }
+                        })
+                        .join("");
+                } catch (err) {
+                    container.innerHTML = `<p class="muted">加载失败：${escapeHTML(err.message)}</p>`;
+                }
+            }
 
-      loadPosts();
-    </script>
-  </body>
+            loadPosts();
+        </script>
+    </body>
 </html>
